@@ -98,11 +98,14 @@ wss.on('connection', function connection(ws) {
     }
     var delay = Math.floor(Math.random()*5000) + 500;
     timeout = setTimeout(function () {
-      sendRandomWorld();
-      resetTimeout();
+      if (ws.OPEN == ws.readyState) {
+        sendRandomWorld();
+        resetTimeout();
+      }
     }, delay);
   }
 
+  sendRandomWorld();
   resetTimeout();
 });
 
